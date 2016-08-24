@@ -62,3 +62,9 @@ def getBzhanInfoByKeywords(keyword='曾艳芬'):
                 print(temp['imgURL'])
 
     return json.dumps(result)
+
+if __name__ == '__main__':
+    r = getBzhanInfoByKeywords()
+    with open('r.txt', 'w', encoding='utf-8') as f:
+        f.write(r)
+        print("saved as r.txt")
