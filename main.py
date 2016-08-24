@@ -6,7 +6,7 @@ import json
 
 def getBzhanInfoByKeywords(keyword='曾艳芬'):
     """
-    保存所有封面，返回值是一个json，结构为[{"imgURL": imgURL, "shareURL": flash地址, "title": 标题},……]
+    保存所有封面，返回值是一个json，结构为[{"imgURL": imgURL, "shareURL": flash地址, "title": 标题, 'up': UP主},……]
     :type keywords: str
     :return: json
     """
@@ -66,6 +66,7 @@ def getBzhanInfoByKeywords(keyword='曾艳芬'):
             temp = getInfoFromLi(li)
             result.append(temp)
             try:
+                # downloadImg(%temp['imgURL'])
                 pass
             except:
                 print('error with %s'%temp['imgURL'])
