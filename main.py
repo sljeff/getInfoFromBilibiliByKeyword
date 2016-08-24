@@ -37,7 +37,12 @@ def getBzhanInfoByKeywords(keyword='曾艳芬'):
         shareURL = 'http://static.hdslb.com/miniloader.swf?aid=%s&page=1' % avCode
         title = soupTemp.img['title']
         imgURL = soupTemp.img['src']
-        return {'shareURL': shareURL, 'title': title, 'imgURL': imgURL}
+        upSpan = soupTemp.find_all('span')[-1]
+        try:
+            up = BeautifulSoup(str(upSpan), "html.parser").a.string
+        except:
+            up = 'None'
+        return {'shareURL': shareURL, 'title': title, 'imgURL': imgURL, 'up': up}
 
     def getInfoFromHTML(html):
         soup = BeautifulSoup(html, "html.parser")
@@ -48,14 +53,20 @@ def getBzhanInfoByKeywords(keyword='曾艳芬'):
 
     for i in range(1, numPages + 1):
         url = baseURL + str(i)
-        r = requests.get(url)
+        try:
+            r = requests.get(url)
+        except:
+            try:
+                r = requests.get(url)
+            except:
+                return json.dumps(result)
         html = r.json()['html']
         lis = getInfoFromHTML(html)
         for li in lis:
             temp = getInfoFromLi(li)
             result.append(temp)
             try:
-                downloadImg(temp['imgURL'])
+                pass
             except:
                 print('error with %s'%temp['imgURL'])
             finally:
