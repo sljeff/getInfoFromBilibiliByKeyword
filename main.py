@@ -66,7 +66,7 @@ def getBzhanInfoByKeywords(keyword='曾艳芬'):
             temp = getInfoFromLi(li)
             result.append(temp)
             try:
-                # downloadImg(%temp['imgURL'])
+                # downloadImg(temp['imgURL'])
                 pass
             except:
                 print('error with %s'%temp['imgURL'])
