@@ -28,7 +28,7 @@ def getBzhanInfoByKeywords(keyword='曾艳芬'):
     preR = requests.get(baseURL + str(preNum))
     prerResult = preR.json()
     numPages = int(prerResult['numPages'])
-    pool = gevent.pool.Pool(50)
+    pool = gevent.pool.Pool(20)
 
     def downloadImg(imgURL):
         """
